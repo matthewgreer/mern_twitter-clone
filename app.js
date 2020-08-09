@@ -5,6 +5,7 @@ const db = require('./config/keys').mongoURI;
 const bodyParser = require('body-parser');
 const users = require("./routes/api/users");
 const tweets = require("./routes/api/tweets");
+// const User = require("./models/User");
 
 mongoose
   .connect(db, {
@@ -13,14 +14,19 @@ mongoose
   })
   .then(() => console.log("Connected to MongoDB successfully"))
   .catch((err) => console.log(err));
-
-app.get("/", (req, res) => {
-  // console.log(res);
-  res.send("Hello World");
-});
-
+  
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.get("/", (req, res) => {
+  // const user = new User({
+  //   handle: "jim",
+  //   email: "jim@jim.jim",
+  //   password: "jimisgreat123"
+  // })
+  // user.save()
+  res.send("Hello World");
+});
 
 app.use("/api/users", users);
 app.use("/api/tweets", tweets);
